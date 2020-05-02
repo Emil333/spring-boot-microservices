@@ -1,0 +1,29 @@
+Spring boot microservices implementation using Spring cloud and Eureka Service discovery
+
+We have 3 microservice which are namely
+
+1. movie-catalog-service
+2. ratings-data-service
+3. movie-info-service
+
+
+The Microservice 'movie-catalog-service' is exposed to the client. This microservice communicates to both ratings-data-service and movie-info-service to fetch data
+
+To implement Service discovery we implement another service called the Discorvery-service which implements Eureka server 
+
+So the complete flow is as below.
+
+1. Create 3 different spring boot applications which are named above
+2. Connect to each of these using hard coded urls, fetch data and make the implementations work
+3. To implement Service discovery - add a new Service called the Discorver-server which implements the Eureka Server and Spring cloud
+4. Initalise it and run it
+5. Implement Eureaka-client in the 3 different microservices, re run it
+6. Go to localhost:8761 which is the port in which discovery-server is running
+7. we can see all the different microservices in the UI for eureka server. To specify the name for each of the microservice, add the property
+	spring.application.name="name" in application.properties of each of the microservice
+8. Replace the hard coded url for eg: localhost:8082 with the applciation name of the respecitve nicroservice
+9. In our case, the microservice, movie-catalog-service is exposed to client side and it internally communicated with other microservices.
+10. So replace the hard coded urls in movie-catalog-service with the microservice applicatin names 
+11. Also for the RestTemplate Bean created on application initialisatio, add an annotation "@LoadBalanced" which happens to be handling the load balancing and    		service discovery
+
+
